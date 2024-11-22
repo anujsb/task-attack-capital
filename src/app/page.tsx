@@ -1,101 +1,156 @@
+"use client";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
+interface Post {
+  id: number;
+  title: string;
+  author: string;
+  content: string;
+  image: string;
+}
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const posts: Post[] = [
+    {
+      id: 1,
+      title: "Getting Started with Next.js",
+      author: "John Doe",
+      content:
+        "Next.js is a powerful React framework that makes building web applications a breeze. In this post, we'll explore the basics of Next.js and how to get started with your first project...",
+      image: "/favicon.ico",
+    },
+    {
+      id: 2,
+      title: "The Future of AI in Web Development",
+      author: "Jane Smith",
+      content:
+        "Artificial Intelligence is rapidly changing the landscape of web development. From intelligent chatbots to automated testing, AI is revolutionizing how we build and maintain websites...",
+      image: "/favicon.ico",
+    },
+    {
+      id: 3,
+      title: "Mastering CSS Grid Layout",
+      author: "Alex Johnson",
+      content:
+        "CSS Grid Layout is a game-changer for web designers. It provides a powerful and flexible way to create complex layouts with ease. In this tutorial, we'll dive deep into CSS Grid...",
+      image: "/favicon.ico",
+    },
+    {
+      id: 4,
+      title: "Optimizing React Performance",
+      author: "Emily Brown",
+      content:
+        "Performance is crucial for a great user experience. In this post, we'll explore various techniques to optimize your React applications, from code splitting to memoization...",
+      image: "/favicon.ico",
+    },
+    {
+      id: 5,
+      title: "The Power of GraphQL",
+      author: "Michael Lee",
+      content:
+        "GraphQL is changing how we think about API design. Learn how this query language for APIs can make your data fetching more efficient and flexible in this comprehensive guide...",
+      image: "/favicon.ico",
+    },
+  ];
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col lg:flex-row p-8 min-h-screen">
+      <div className="w-full lg:w-3/4 lg:pr-8">
+        <h1 className="text-3xl font-bold mb-6">Latest Blog Posts</h1>
+        <div className="mb-6 relative">
+          <Input
+            type="text"
+            placeholder="Search by author"
+            value={searchTerm}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchTerm(e.target.value)
+            }
+            className="pl-10"
+          />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={20}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div>
+          <div className="space-y-8">
+            {posts.map((post) => (
+              <Card key={post.id}>
+                <div className="md:flex">
+                  <div className="md:w-1/3">
+                    <Image
+                      src={post.image}
+                      alt={`Thumbnail for ${post.title}`}
+                      width={300}
+                      height={200}
+                      className="w-full h-48 object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+                    />
+                  </div>
+                  <div className="md:w-2/3">
+                    <CardHeader>
+                      <CardTitle>{post.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        By {post.author}
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="mb-4">
+                        {post.content.substring(0, 150)}...
+                      </p>
+                      <Link
+                        href={`/post/${post.id}`}
+                        className="text-primary hover:underline"
+                      >
+                        Read more
+                      </Link>
+                    </CardContent>
+                  </div>
+                </div>
+
+                {/* <CardHeader>
+                  <CardTitle>{post.title}</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    By {post.author}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">{post.content.substring(0, 150)}...</p>
+                  <Link
+                    href={`/post/${post.id}`}
+                    className="text-primary hover:underline"
+                  >
+                    Read more
+                  </Link>
+                </CardContent> */}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="w-full lg:w-1/4 mt-8 lg:mt-0">
+        <div className="sticky top-8">
+          <Card>
+            <CardContent className="pt-6">
+              <Image
+                src="/favicon.ico"
+                alt="Company Logo"
+                width={100}
+                height={100}
+                className="mx-auto mb-4"
+              />
+              <CardTitle className="text-center mb-2">Attack Capital</CardTitle>
+              <p className="text-center text-muted-foreground">
+                Blog project by anuj bhuyar
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
