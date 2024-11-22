@@ -1,10 +1,9 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 const Header = () => {
   return (
-    <div>
-        <nav className="bg-accent  p-4">
+    <nav className="sticky top-0  text-accent bg-primary p-4 z-30">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
           BlogPlatform
@@ -16,8 +15,7 @@ const Header = () => {
         </div>
       </div>
     </nav>
-    </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
