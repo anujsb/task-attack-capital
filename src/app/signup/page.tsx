@@ -2,9 +2,11 @@ import React from 'react'
 
 const page = () => {
   return (
-    <form 
-    // onSubmit={handleSubmit}
-     className="max-w-md mx-auto">
+    <div className="h-screen flex flex-col  items-center justify-center bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)]">
+      <form
+        // onSubmit={handleSubmit}
+        className=" p-10  rounded-lg bg-[#f0f1fa]"
+      >
       <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
       <input
         type="text"
@@ -34,6 +36,7 @@ const page = () => {
         Sign Up
       </button>
     </form>
+    </div>
   )
 }
 
