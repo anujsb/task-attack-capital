@@ -11,11 +11,10 @@ export default {
     extend: {
       colors: {
         text: "#000000",
-        background: "#f4eff6",
-        primary: "#190c39",
-        secondary: "#f2bd9e",
-        // accent: "#190c39",
-        accent: "#ba9afd",
+        background: "#f0f1fa",
+        primary: "#2d2e3a",
+        secondary: "#acacfb",
+        accent: "#ccc673",
         // background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
