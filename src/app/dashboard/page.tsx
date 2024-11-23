@@ -1,6 +1,7 @@
 import Blog from "@/components/Blog";
 import MyBlog from "@/components/MyBlog";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
@@ -18,9 +19,11 @@ const page = () => {
         <div className="pt-4">
           <h1 className="text-center mb-2 text-3xl">Hi, User</h1>
         </div>
-        <Button className=" bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none">
-          Add Blog
-        </Button>
+        <Link href="/create-post" >
+          <Button className=" bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none">
+          Create Post
+          </Button>
+        </Link>
       </div>
       <div className="border rounded-lg mt-10 p-10">
         <h1 className="text-center mb-2 text-3xl">your Blogs</h1>
