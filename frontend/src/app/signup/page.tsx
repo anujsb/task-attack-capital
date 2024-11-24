@@ -1,32 +1,31 @@
 "use client";
-
 import Info from "@/components/Info";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const page = () => {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const response = await fetch("https://task-attack-capital.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }), 
+        body: JSON.stringify({ name, email, password }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        alert(data.message); 
+        alert(data.message);
+        router.push('/login');
       } else {
         alert(data.message);
       }
@@ -38,7 +37,7 @@ const page = () => {
 
   return (
     <div className="h-screen w-full grid grid-flow-col gap-2">
-      <div className="hidden lg:block  felx items-center justify-center bg-gradient-to-br from-purple-100 to-blue-50 rounded-lg border-r border-accent h-full w-full p-20">
+      <div className="hidden lg:block felx items-center justify-center bg-gradient-to-br from-purple-100 to-blue-50 rounded-lg border-r border-accent h-full w-full p-20">
         {" "}
         <Info />
       </div>

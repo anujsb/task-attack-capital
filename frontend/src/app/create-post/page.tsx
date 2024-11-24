@@ -6,8 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { FileUpload } from "@/components/ui/file-upload";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -38,7 +40,6 @@ const page = () => {
     formData.append("title", title);
     formData.append("content", content);
 
-
     files.forEach((file) => {
       formData.append("images", file);
     });
@@ -67,6 +68,7 @@ const page = () => {
         setImage(null);
         setImagePreview(null);
         setFiles([]);
+        router.push('/dashboard');
       } else {
         console.error("Error creating post:", data.message);
       }
