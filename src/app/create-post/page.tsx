@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { FileUpload } from "@/components/ui/file-upload";
 
 const page = () => {
   const [title, setTitle] = useState("");
@@ -33,17 +34,27 @@ const page = () => {
     setImagePreview(null);
   };
 
+  const [files, setFiles] = useState<File[]>([]);
+  const handleFileUpload = (files: File[]) => {
+    setFiles(files);
+    console.log(files);
+  };
+
   return (
-    <div className="h-screen flex flex-col  items-center justify-center bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)] ">
+    <div className="h-screen flex flex-col  items-center justify-center p-10">
       <form
         // onSubmit={handleSubmit}
-        className=" p-10  rounded-lg bg-background w-2/3"
+        className=" p-10  rounded-xl bg-white shadow-sm lg:w-2/3 w-full "
       >
         {/* <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4"> */}
-        <h1 className="text-2xl font-bold mb-4">Create a New Post</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          Create a New Post
+        </h1>
 
         <div>
-          <Label htmlFor="title">Title</Label>
+          <Label className="" htmlFor="title">
+            Title
+          </Label>
           <Input
             id="title"
             type="text"
@@ -51,7 +62,21 @@ const page = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="border border-dashed "
           />
+        </div>
+        <div>
+          <Label htmlFor="image">Image</Label>
+          {/* <Input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+          /> */}
+          <div className="w-full max-w-4xl mx-auto min-h-40 border border-dashed bg-white  border-neutral-200 rounded-lg">
+            <FileUpload onChange={handleFileUpload} />
+          </div>
         </div>
 
         <div>
@@ -61,19 +86,8 @@ const page = () => {
             placeholder="Write your post content here"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="h-64"
+            className="border border-dashed "
             required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="image">Image</Label>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
           />
         </div>
 
@@ -87,7 +101,7 @@ const page = () => {
           </div>
         )}
 
-        <Button type="submit" className="w-full mt-4 text-white">
+        <Button type="submit" className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold ">
           Create Post
         </Button>
       </form>
