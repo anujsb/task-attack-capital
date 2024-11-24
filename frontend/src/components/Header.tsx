@@ -12,12 +12,20 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
-
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    setIsLoggedIn(!!token);
-  }, []);
+    const checkAuthStatus = () => {
+      const token = localStorage.getItem("authToken");
+      setIsLoggedIn(!!token);
+    };
 
+    checkAuthStatus();
+
+    window.addEventListener("authStateChange", checkAuthStatus);
+
+    return () => {
+      window.removeEventListener("authStateChange", checkAuthStatus);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +39,6 @@ const Header = () => {
     };
   }, []);
 
-
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -41,6 +48,7 @@ const Header = () => {
       }
 
       localStorage.removeItem("authToken");
+      window.dispatchEvent(new Event("authStateChange"));
       setIsLoggedIn(false);
 
       const response = await fetch("http://localhost:3000/api/auth/logout", {
