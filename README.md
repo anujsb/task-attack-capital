@@ -1,171 +1,138 @@
+# Personal Blog Platform task
 
-# Task Attack Capital
 
+---
 
 ## Features
 
-- **User Authentication**:
-  - Secure signup and login with JWT-based authentication.
-  - Passwords are securely hashed using industry standards.
-- **Task Management**:
-  - Create, update, delete, and view tasks.
-  - Tasks linked to individual users for personalization.
-- **API-Driven Backend**:
-  - RESTful API endpoints for seamless integration.
-- **Responsive Design**:
-  - A clean, user-friendly interface designed with **Tailwind CSS**.
-- **Scalable Architecture**:
-  - Structured for easy scalability and future enhancements.
+### Backend
+- **User Authentication**: Secure sign-up and login with JWT-based authentication.
+- **API Endpoints**:
+  - `POST /signup`: Register a new user.
+  - `POST /login`: Authenticate a user and return a session token.
+  - `POST /post`: Create a new article (authenticated users only).
+  - `GET /posts`: Retrieve all posts.
+  - `GET /posts?author=userId`: Retrieve posts by a specific author.
+- **Data Models**:
+  - User: `id`, `email`, `passwordHash`
+  - Post: `id`, `title`, `content`, `authorId`, `createdAt`
+- Passwords stored securely using hashing.
+
+### Frontend
+- **Pages**:
+  - `/`: Homepage displaying all posts.
+  - `/login`: Login page.
+  - `/signup`: Sign-up page.
+  - `/dashboard`: Private dashboard for creating and managing user posts.
+- **Client-Side Routing** for seamless navigation.
+- **Server-Side Rendering (SSR)** for the homepage.
+- **Static Generation** for individual blog posts (where applicable).
+- **Responsive Design** with clean UI using CSS Modules.
 
 ---
 
-## Tech Stack
-
-- **Frontend**: React.js, Tailwind CSS
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Authentication**: JWT (JSON Web Tokens)
-- **Deployment**: [Add deployment details if applicable]
-
----
-
-## File Structure
-
-### Backend (`/backend`)
-
-The backend directory contains all server-side code, including the API, database models, controllers, and authentication logic.
-
-```
-backend
-├── config
-│   └── db.js               # MongoDB connection setup
-├── controllers
-│   ├── authController.js   # Authentication-related logic
-│   ├── taskController.js   # Task CRUD operations
-├── middleware
-│   ├── authMiddleware.js   # JWT authentication middleware
-├── models
-│   ├── Task.js             # Task schema definition
-│   ├── User.js             # User schema definition
-├── routes
-│   ├── authRoutes.js       # Authentication routes
-│   ├── taskRoutes.js       # Task-related routes
-├── utils
-│   ├── errorHandler.js     # Custom error handler
-├── server.js               # Entry point for the backend server
-└── .env                    # Environment variables (not included in repo)
-```
-### Frontend (`/frontend`)
-
-The frontend directory houses the client-side application built with React and styled using Tailwind CSS.
-```
-frontend
-├── public
-│   ├── index.html          # Main HTML file
-├── src
-│   ├── components
-│   │   ├── AuthForm.js     # Login and signup forms
-│   │   ├── Navbar.js       # Navigation bar
-│   │   ├── TaskItem.js     # Single task component
-│   ├── pages
-│   │   ├── Home.js         # Home page showing tasks
-│   │   ├── Login.js        # Login page
-│   │   ├── Signup.js       # Signup page
-│   │   ├── Dashboard.js    # User dashboard for task management
-│   ├── services
-│   │   ├── api.js          # API calls for tasks and auth
-│   ├── styles
-│   │   ├── globals.css     # Global styles
-│   ├── App.js              # Main application component
-│   ├── index.js            # Entry point for React app
-│   ├── .env.local          # Frontend environment variables (not included in repo)
-```
----
-
-## Installation
+## Installation and Setup
 
 ### Prerequisites
-Ensure you have the following installed on your system:
-- Node.js (v14 or later)
-- MongoDB (local or hosted instance)
+- Node.js (v18+)
+- npm or yarn
+- MongoDB (or your preferred database)
 
-### Steps to Run Locally
-
-#### Clone the Repository
-
-git clone https://github.com/anujsb/task-attack-capital.git
-cd task-attack-capital
-
+### Clone the Repository
+```
+git clone https://github.com/your-username/personal-blog-platform.git
+cd personal-blog-platform
+```
 Backend Setup
 
 	1.	Navigate to the backend directory:
-
+```
 cd backend
-
+```
 
 	2.	Install dependencies:
-
+```
 npm install
 
-
-	3.	Create a .env file in the backend directory with the following variables:
-
+```
+	3.	Create a .env file and configure the following environment variables:
+```
 PORT=5000
-DATABASE_URL=mongodb://localhost:27017/task-attack
-JWT_SECRET=your_jwt_secret
-
+MONGO_URI=your_mongo_database_uri
+JWT_SECRET=your_secret_key
+```
 
 	4.	Start the backend server:
+```
+npm start
 
-npm run dev
-
-
+```
 
 Frontend Setup
 
 	1.	Navigate to the frontend directory:
-
-cd ../frontend
-
+```
+cd frontend
+```
 
 	2.	Install dependencies:
-
+```
 npm install
+```
 
+	3.	Start the development server:
+```
+npm run dev
 
-	3.	Create a .env.local file in the frontend directory:
+```
+	4.	Access the application at http://localhost:3000.
 
-REACT_APP_API_URL=http://localhost:5000
+Project Structure
 
+Backend
 
-	4.	Start the frontend server:
+	•	/routes: Contains API routes for user authentication and blog posts.
+	•	/models: Mongoose models for User and Post.
+	•	/controllers: Business logic for handling API requests.
+	•	server.js: Entry point for the Express application.
 
+Frontend
+
+	•	/pages: All Next.js pages (e.g., homepage, login, signup, dashboard).
+	•	/components: Reusable React components.
+	•	/styles: CSS modules for styling.
+	•	/utils: Helper functions for API calls and authentication.
+
+Technologies Used
+
+	•	Backend: Node.js, Express, MongoDB, JWT, bcrypt
+	•	Frontend: Next.js 14, TypeScript, React, CSS Modules
+
+Key Decisions
+
+	•	JWT Authentication: Provides a secure and scalable method for session management.
+	•	Next.js Features: Server-Side Rendering (SSR) for SEO-friendly and fast loading times; Static Generation for performance optimization.
+	•	Responsive UI: Ensures accessibility across different devices.
+
+Commands
+
+Backend
+
+	•	Start server:
+```
 npm start
+```
 
-API Endpoints
 
-Authentication
+Frontend
 
-	•	POST /api/auth/signup: Register a new user.
-	•	POST /api/auth/login: Authenticate a user and return a token.
+	•	Start development server:
+```
+npm run dev
+```
+Security Considerations
 
-Tasks
+	•	Passwords are hashed before storage using bcrypt.
+	•	Sensitive data is protected using .env configuration.
+	•	Authentication middleware ensures protected routes.
 
-	•	GET /api/tasks: Retrieve all tasks for the logged-in user.
-	•	POST /api/tasks: Create a new task.
-	•	PUT /api/tasks/:id: Update a task by ID.
-	•	DELETE /api/tasks/:id: Delete a task by ID.
-
-Future Improvements
-
-	•	Advanced Features:
-	•	Add reminders for tasks.
-	•	Enable task prioritization and categorization.
-	•	UI Enhancements:
-	•	Improve styling and add animations.
-	•	Testing:
-	•	Add unit and integration tests for both frontend and backend.
-
-License
-
-This project is licensed under the MIT License.
