@@ -15,7 +15,7 @@ const page = () => {
           placeholder="Email"
           // value={email}
           // onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border border-accent rounded shadow-sm"
+          className="w-full p-2 mb-4 border border-dashed rounded shadow-sm"
           required
         />
         <Input
@@ -23,12 +23,17 @@ const page = () => {
           placeholder="Password"
           // value={password}
           // onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 border border-accent rounded shadow-sm"
+          className="w-full p-2 mb-4 rounded shadow-sm border border-dashed  "
           required
         />
-        <Button type="submit" className="w-full p-2  text-white rounded">
-          Login
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold"
+          >
+            Login
+          </Button>
+        </div>
       </form>
     </div>
   );

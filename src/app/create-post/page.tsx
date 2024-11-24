@@ -101,9 +101,14 @@ const page = () => {
           </div>
         )}
 
-        <Button type="submit" className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold ">
-          Create Post
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold "
+          >
+            Create Post
+          </Button>
+        </div>
       </form>
     </div>
   );
