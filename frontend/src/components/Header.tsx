@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { SquarePen, Menu, X } from 'lucide-react';
+import { SquarePen, Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
@@ -12,13 +12,13 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
-  // Check login state on mount
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     setIsLoggedIn(!!token);
   }, []);
 
-  // Handle scroll effect
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -31,7 +31,7 @@ const Header = () => {
     };
   }, []);
 
-  // Handle sign-out with server logout
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("authToken");
@@ -63,7 +63,7 @@ const Header = () => {
     }
   };
 
-  // Protected route navigation
+  // Protected
   const handleProtectedRoute = (route: string) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -89,8 +89,8 @@ const Header = () => {
         <Link href="/" className="text-xl font-bold">
           BlogPlatform
         </Link>
-        
-        {/* Mobile menu button */}
+
+
         <button
           className="md:hidden"
           onClick={toggleMenu}
@@ -99,17 +99,15 @@ const Header = () => {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Desktop menu */}
+
         <div className="hidden md:flex space-x-4 items-center">
           {renderMenuItems()}
         </div>
       </div>
 
-      {/* Mobile menu */}
+
       {isMenuOpen && (
-        <div className="md:hidden mt-2 space-y-2">
-          {renderMenuItems()}
-        </div>
+        <div className="md:hidden mt-2 space-y-2">{renderMenuItems()}</div>
       )}
     </nav>
   );
@@ -119,11 +117,22 @@ const Header = () => {
       <>
         {!isLoggedIn ? (
           <>
-            <Link href="/login" className="block md:inline-block py-2 px-4 hover:bg-gray-100 rounded">Login</Link>
-            <Link href="/signup" className="block md:inline-block py-2 px-4 hover:bg-gray-100 rounded">Sign Up</Link>
+            <Link href="/login" className="block md:inline-block">
+              <Button variant="ghost">Login</Button>
+            </Link>
+            <Link
+              href="/signup"
+              className="block md:inline-block text-white font-semibold"
+            >
+              <Button variant="default">Sign Up</Button>
+            </Link>
           </>
         ) : (
-          <Button variant="outline" onClick={handleLogout} className="w-full md:w-auto">
+          <Button
+            variant="outline"
+            onClick={handleLogout}
+            className="w-full md:w-auto"
+          >
             Sign Out
           </Button>
         )}
@@ -131,13 +140,14 @@ const Header = () => {
         <Button
           variant="outline"
           onClick={() => handleProtectedRoute("/create-post")}
-          className="w-full md:w-auto flex items-center justify-center"
+          className="w-full md:w-auto"
         >
           <SquarePen className="mr-2" />
           Create Post
         </Button>
         <Button
-          className="w-full md:w-auto bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition"
+        variant="default"
+          className="w-full md:w-auto bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-lg shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition"
           onClick={() => handleProtectedRoute("/dashboard")}
         >
           Dashboard
@@ -148,4 +158,3 @@ const Header = () => {
 };
 
 export default Header;
-

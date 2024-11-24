@@ -38,7 +38,7 @@ const page = () => {
     formData.append("title", title);
     formData.append("content", content);
 
-    // Append all files to formData
+
     files.forEach((file) => {
       formData.append("images", file);
     });
@@ -53,7 +53,7 @@ const page = () => {
       const response = await fetch("https://task-attack-capital.onrender.com/api/posts/post", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`, // Include the token
+          Authorization: `Bearer ${token}`, 
         },
         body: formData,
       });

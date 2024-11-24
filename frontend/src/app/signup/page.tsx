@@ -20,15 +20,15 @@ const page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }), // Include name
+        body: JSON.stringify({ name, email, password }), 
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message); // You can show a success message here
+        alert(data.message); 
       } else {
-        alert(data.message); // Show error message
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error during signup:", error);

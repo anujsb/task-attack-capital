@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import { useRouter } from "next/navigation"; 
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,13 +27,12 @@ const Page = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Store the token for future API requests (e.g., in localStorage)
+
         localStorage.setItem("authToken", data.token);
 
-        // Redirect to /create-post
         router.push("/create-post");
       } else {
-        alert(data.message); // Show error message from the server
+        alert(data.message); 
       }
     } catch (error) {
       console.error("Error during login:", error);
