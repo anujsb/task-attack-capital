@@ -14,7 +14,7 @@ const Info = () => {
       >
         <Image
           // src="/attack-white.webp"
-          src="/attack-black.png"
+          src="/Attack-black.png"
           // src="/attack.jpeg"
           alt="Company Logo"
           width={100}
