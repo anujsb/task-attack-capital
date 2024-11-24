@@ -25,9 +25,13 @@
 
 // export default router; // Export the router as default
 
-
 import express from "express";
-import { createPost, getAllPosts, getUserPosts } from "../controllers/post.js";
+import {
+  createPost,
+  getAllPosts,
+  getUserPosts,
+  getPostById,
+} from "../controllers/post.js";
 import authMiddleware from "../middlewares/auth.js";
 import multer from "multer";
 
@@ -43,9 +47,6 @@ router.post("/post", upload.array("images", 5), authMiddleware, createPost);
 router.get("/posts", getAllPosts);
 router.get("/posts/user", authMiddleware, getUserPosts);
 
-
 router.get("/posts/:id", getPostById);
-
-
 
 export default router;
