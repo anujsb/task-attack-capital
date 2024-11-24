@@ -185,7 +185,6 @@
 // };
 
 // export default PostPage;
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -203,14 +202,7 @@ interface Post {
   imageLink: string | null;
 }
 
-// Define the correct props type for the PostPage
-interface PostPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const PostPage: React.FC<PostPageProps> = ({ params }) => {
+const PostPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
