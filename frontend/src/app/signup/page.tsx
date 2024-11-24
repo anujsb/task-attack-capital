@@ -37,7 +37,7 @@ const page = () => {
   };
 
   return (
-    <div className="h-screen w-full fixed top-0 grid grid-flow-col gap-2">
+    <div className="h-screen w-full grid grid-flow-col gap-2">
       <div className="hidden lg:block  felx items-center justify-center bg-gradient-to-br from-purple-100 to-blue-50 rounded-lg border-r border-accent h-full w-full p-20">
         {" "}
         <Info />
