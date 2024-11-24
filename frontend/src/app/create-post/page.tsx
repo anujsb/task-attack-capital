@@ -41,7 +41,7 @@ const page = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col  items-center justify-center p-10 ">
+    <div className="h-screen flex flex-col  items-center justify-center p-10 bg-gradient-to-br from-purple-100 to-blue-50">
       <form
         // onSubmit={handleSubmit}
         className=" p-10  rounded-xl bg-white shadow-sm lg:w-2/3 w-full "

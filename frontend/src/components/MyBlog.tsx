@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 interface Post {
   id: number;
@@ -64,11 +65,17 @@ const MyBlog = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-10 p-4">
       <div className="w-full ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ ease: "easeInOut", duration: 0.75 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {" "}
           {filteredPosts.map((post) => (
             <Card
               key={post.id}
-              className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm "
+              className="flex flex-col justify-between overflow-hidden bg-transparent shadow-none border border-secondary p-2 hover:shadow-lg duration-500 transition hover:border-accent"
             >
               <Image
                 src={post.image}
@@ -90,7 +97,7 @@ const MyBlog = () => {
                 <Link href={`/post/${post.id}`}>
                   <Button
                     variant="outline"
-                    className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none"
+                    className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition  flex  items-center justify-center"
                   >
                     Read more
                   </Button>
@@ -98,7 +105,7 @@ const MyBlog = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

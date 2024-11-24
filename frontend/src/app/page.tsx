@@ -13,7 +13,7 @@ import Info from "@/components/Info";
 export default function Home() {
   return (
     <div className="min-h-screen ">
-      <div className="flex items-center justify-center bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)] p-10 m-10 rounded-lg border border-accent">
+      <div className="flex items-center justify-center bg-gradient-to-br from-purple-100 to-blue-50 p-10 top-0 rounded-lg border-b border-accent">
         <Info />
       </div>
       <Blog />
