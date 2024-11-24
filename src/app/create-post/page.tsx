@@ -41,7 +41,7 @@ const page = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col  items-center justify-center p-10">
+    <div className="h-screen flex flex-col  items-center justify-center p-10 ">
       <form
         // onSubmit={handleSubmit}
         className=" p-10  rounded-xl bg-white shadow-sm lg:w-2/3 w-full "
@@ -51,8 +51,8 @@ const page = () => {
           Create a New Post
         </h1>
 
-        <div>
-          <Label className="" htmlFor="title">
+        <div className="mb-4">
+          <Label className="mb-4" htmlFor="title">
             Title
           </Label>
           <Input
@@ -62,11 +62,11 @@ const page = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="border border-dashed "
+            className="border border-dashed mb-4"
           />
         </div>
-        <div>
-          <Label htmlFor="image">Image</Label>
+        <div className="mb-4">
+          <Label className="mb-4" htmlFor="image">Image</Label>
           {/* <Input
             id="image"
             type="file"
@@ -79,14 +79,14 @@ const page = () => {
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="content">Content</Label>
+        <div className="mb-4">
+          <Label className="mb-4" htmlFor="content">Content</Label>
           <Textarea
             id="content"
             placeholder="Write your post content here"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="border border-dashed "
+            className="border border-dashed mb-4"
             required
           />
         </div>

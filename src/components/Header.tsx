@@ -14,7 +14,9 @@ const Header = () => {
           <Link href="/signup">Sign Up</Link>
           <Link href="/create-post">Create Post</Link>
           <Link href="/dashboard">
-            <Button className="text-white font-semibold rounded-full shadow-lg">dashboard</Button>
+            <Button className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold ">
+              dashboard
+            </Button>
           </Link>
         </div>
       </div>
