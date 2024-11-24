@@ -43,4 +43,9 @@ router.post("/post", upload.array("images", 5), authMiddleware, createPost);
 router.get("/posts", getAllPosts);
 router.get("/posts/user", authMiddleware, getUserPosts);
 
+
+router.get("/posts/:id", getPostById);
+
+
+
 export default router;

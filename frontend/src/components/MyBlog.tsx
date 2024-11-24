@@ -123,7 +123,7 @@ const MyBlog = () => {
                   <Link href={`/post/${post.id}`}>
                     <Button
                       variant="outline"
-                      className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition  flex  items-center justify-center"
+                      className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition flex items-center justify-center"
                     >
                       Read more
                     </Button>
