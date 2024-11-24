@@ -15,7 +15,7 @@ const page = () => {
                 Add Blog
             </Button>
         </div> */}
-      <div className="flex items-center justify-between bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)] p-10 rounded-lg border border-[#cacafb]">
+      <div className="flex items-center justify-between bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)] p-10 rounded-lg border border-accent">
         <div className="pt-4">
           <h1 className="text-center mb-2 text-3xl">Hi, User</h1>
         </div>

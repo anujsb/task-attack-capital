@@ -1,35 +1,34 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import React from "react";
 
 const page = () => {
   return (
-    <div className="h-screen flex flex-col  items-center justify-center bg-[radial-gradient(circle,_#cacafb_45%,_#ffd1c700)]">
+    <div className="h-screen flex flex-col  items-center justify-center p-10">
       <form
         // onSubmit={handleSubmit}
-        className=" p-10  rounded-lg bg-[#f0f1fa]"
+        className=" p-10  rounded-xl bg-white shadow-sm lg:w-1/3 w-full "
       >
         <h1 className="text-2xl font-bold mb-4">Login</h1>
-        <input
+        <Input
           type="email"
           placeholder="Email"
           // value={email}
           // onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border border-accent rounded shadow-sm"
           required
         />
-        <input
+        <Input
           type="password"
           placeholder="Password"
           // value={password}
           // onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border border-accent rounded shadow-sm"
           required
         />
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded"
-        >
+        <Button type="submit" className="w-full p-2  text-white rounded">
           Login
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -68,7 +68,7 @@ const MyBlog = () => {
           {filteredPosts.map((post) => (
             <Card
               key={post.id}
-              className="overflow-hidden bg-transparent shadow-none border border-[#cacafb] p-2 hover:shadow-sm "
+              className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm "
             >
               <Image
                 src={post.image}

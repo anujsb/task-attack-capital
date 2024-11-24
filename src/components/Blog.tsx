@@ -66,9 +66,9 @@ const Blog = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-10 p-4">
       <div className="w-full lg:w-1/4 ">
-        <div className="sticky top-20 bg-[#cacafb] p-4 rounded-2xl">
-          <div className="mb-6 flex gap-2 border border-primary rounded-full p-2">
-            <Search className=" text-primary mt-2" size={20} />
+        <div className="sticky top-20 bg-accent p-4 rounded-2xl">
+          <div className="mb-6 flex gap-2 border border-none rounded-full p-2">
+            <Search className=" text-text mt-2" size={20} />
             <Input
               type="text"
               placeholder="Search by author"
@@ -76,7 +76,7 @@ const Blog = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSearchTerm(e.target.value)
               }
-              className="border-none rounded-full shadow-none placeholder:text-primary"
+              className=" rounded-full shadow-none placeholder:text-text border-text"
             />
           </div>
           <div>popular tags</div>
@@ -87,7 +87,7 @@ const Blog = () => {
           {filteredPosts.map((post) => (
             <Card
               key={post.id}
-              className="overflow-hidden bg-transparent shadow-none border border-[#cacafb] p-2 hover:shadow-sm "
+              className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm "
             >
               <Image
                 src={post.image}

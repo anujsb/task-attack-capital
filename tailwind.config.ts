@@ -12,9 +12,9 @@ export default {
       colors: {
         text: "#000000",
         background: "#f0f1fa",
-        primary: "#2d2e3a",
-        secondary: "#acacfb",
-        accent: "#ccc673",
+        primary: "#1a2ffb",
+        secondary: "#dedcff",
+        accent: "#cacafb",
         // background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
