@@ -35,6 +35,7 @@
 
 The backend directory contains all server-side code, including the API, database models, controllers, and authentication logic.
 
+```
 backend
 ├── config
 │   └── db.js               # MongoDB connection setup
@@ -53,11 +54,11 @@ backend
 │   ├── errorHandler.js     # Custom error handler
 ├── server.js               # Entry point for the backend server
 └── .env                    # Environment variables (not included in repo)
-
+```
 ### Frontend (`/frontend`)
 
 The frontend directory houses the client-side application built with React and styled using Tailwind CSS.
-
+```
 frontend
 ├── public
 │   ├── index.html          # Main HTML file
@@ -78,7 +79,7 @@ frontend
 │   ├── App.js              # Main application component
 │   ├── index.js            # Entry point for React app
 │   ├── .env.local          # Frontend environment variables (not included in repo)
-
+```
 ---
 
 ## Installation
