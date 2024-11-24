@@ -4,34 +4,26 @@ import { uploadImages } from "./cloudinaryUploader.js"; // Ensure this handles u
 // Controller for creating a post
 export const createPost = async (req, res) => {
   try {
-    console.log("Uploaded files:", req.files);
-    console.log("User:", req.user); // Verify user data
+    const files = req.files; // Access the uploaded files
+    const images = files.map((file) => ({
+      path: `data:${file.mimetype};base64,${file.buffer.toString("base64")}`, // Convert buffer to base64
+    }));
 
-    const { title, content } = req.body;
-    const images = req.files;
+    // Upload images to Cloudinary
+    const uploadedImages = await uploadImages(images);
 
-    if (!images || images.length === 0) {
-      return res
-        .status(400)
-        .json({ message: "At least one image is required for the post." });
-    }
+    // Your logic to save post data, e.g., saving to the database
+    const postData = {
+      user: req.user.id, // Assuming user ID is in req.user
+      images: uploadedImages,
+      // other fields from req.body
+    };
 
-    const uploadedImageUrls = await uploadImages(images);
-
-    const newPost = await Post.create({
-      title,
-      content,
-      authorId: req.user.userId, // This is the logged-in user's ObjectId
-      imageLink: uploadedImageUrls[0],
-    });
-
-    res.status(201).json({
-      message: "Post created successfully",
-      post: newPost,
-    });
+    // Simulate saving post to DB
+    res.status(201).json({ message: "Post created successfully", postData });
   } catch (error) {
     console.error("Error creating post:", error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Error creating post", error });
   }
 };
 
