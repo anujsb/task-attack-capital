@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 interface Post {
-  _id: string;  
+  _id: string;
   title: string;
-  authorId: {  
+  authorId: {
     _id: string;
     name: string;
     email: string;
@@ -29,7 +29,7 @@ const MyBlog = () => {
     const fetchUserPosts = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        
+
         if (!token) {
           setError("Authentication token missing.");
           setLoading(false);
@@ -51,7 +51,7 @@ const MyBlog = () => {
         }
 
         const data = await response.json();
-        setPosts(data); 
+        setPosts(data);
         console.log("Fetched posts:", data);
       } catch (err) {
         setError("Error fetching posts.");
@@ -64,13 +64,23 @@ const MyBlog = () => {
     fetchUserPosts();
   }, []);
 
-
   const filteredPosts = posts.filter((post) =>
     post.authorId?.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
-    return <div>Loading posts...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center m-10">
+        Loading posts...
+        <Image
+          src="/Loader-blog.gif"
+          alt="loader"
+          width="300"
+          height="300"
+          className=""
+        />
+      </div>
+    );
   }
 
   if (error) {

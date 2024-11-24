@@ -23,6 +23,8 @@ interface Post {
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,10 +37,13 @@ const Blog = () => {
           console.log("Fetched Posts:", data);
           setPosts(data);
         } else {
-          console.error("Failed to fetch posts:", response.statusText);
+          throw new Error("Failed to fetch posts: " + response.statusText);
         }
       } catch (error) {
         console.error("Error fetching posts:", error);
+        setError("Error fetching posts.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -50,6 +55,25 @@ const Blog = () => {
   );
 
   console.log("Filtered Posts:", filteredPosts);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center m-10">
+        Loading posts...
+        <Image
+          src="/Loader-blog.gif"
+          alt="loader"
+          width="300"
+          height="300"
+          className=""
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-10 p-4">
@@ -84,7 +108,7 @@ const Blog = () => {
                 className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm"
               >
                 <Image
-                  src={post.imageLink}
+                  src={post.imageLink || "/default-image.jpg"}
                   alt={`Thumbnail for ${post.title}`}
                   width={300}
                   height={200}
@@ -93,7 +117,7 @@ const Blog = () => {
                 <CardHeader>
                   <CardTitle className="text-lg">{post.title}</CardTitle>
                   <p className="text-sm text-muted-foreground">
-                    By {post.authorId?.name}
+                    By {post.authorId?.name || "Anonymous"}
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -101,7 +125,6 @@ const Blog = () => {
                     {post.content.substring(0, 100)}...
                   </p>
                   <Link href={`/post/${post._id}`}>
-                    {" "}
                     <Button
                       variant="outline"
                       className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition flex items-center justify-center"
