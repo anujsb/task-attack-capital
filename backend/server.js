@@ -18,7 +18,7 @@ connectDB();
 // app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:3001", // Replace with your frontend's URL
+    origin: "https://task-attack-capital.vercel.app/", // Replace with your frontend's URL
     methods: ["GET", "POST"],
     credentials: true,
   })
