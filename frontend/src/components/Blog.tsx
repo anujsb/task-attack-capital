@@ -24,7 +24,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/posts/posts");
+        const response = await fetch("https://task-attack-capital.onrender.com/api/posts/posts");
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched Posts:", data);

@@ -34,7 +34,7 @@ const MyBlog = () => {
         }
 
         const response = await fetch(
-          "http://localhost:3000/api/posts/posts/user",
+          "https://task-attack-capital.onrender.com/api/posts/posts/user",
           {
             method: "GET",
             headers: {

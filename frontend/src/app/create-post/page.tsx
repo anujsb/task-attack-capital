@@ -50,7 +50,7 @@ const page = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/posts/post", {
+      const response = await fetch("https://task-attack-capital.onrender.com/api/posts/post", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // Include the token
