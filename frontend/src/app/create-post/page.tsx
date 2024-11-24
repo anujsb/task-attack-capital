@@ -12,6 +12,7 @@ const page = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -25,28 +26,62 @@ const page = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log({ title, content, image });
-    setTitle("");
-    setContent("");
-    setImage(null);
-    setImagePreview(null);
-  };
-
-  const [files, setFiles] = useState<File[]>([]);
   const handleFileUpload = (files: File[]) => {
     setFiles(files);
     console.log(files);
   };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+
+    // Append all files to formData
+    files.forEach((file) => {
+      formData.append("images", file);
+    });
+
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      console.error("Token missing from localStorage.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/posts/post", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Post created successfully:", data);
+        setTitle("");
+        setContent("");
+        setImage(null);
+        setImagePreview(null);
+        setFiles([]);
+      } else {
+        console.error("Error creating post:", data.message);
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col  items-center justify-center p-10 bg-gradient-to-br from-purple-100 to-blue-50">
+      {" "}
       <form
-        // onSubmit={handleSubmit}
-        className=" p-10  rounded-xl bg-white shadow-sm lg:w-2/3 w-full "
+        onSubmit={handleSubmit}
+        className="p-10 rounded-xl bg-white shadow-sm lg:w-2/3 w-full"
       >
-        {/* <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4"> */}
         <h1 className="text-2xl font-bold mb-4 text-center">
           Create a New Post
         </h1>
@@ -65,22 +100,20 @@ const page = () => {
             className="border border-dashed mb-4"
           />
         </div>
+
         <div className="mb-4">
-          <Label className="mb-4" htmlFor="image">Image</Label>
-          {/* <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-          /> */}
-          <div className="w-full max-w-4xl mx-auto min-h-40 border border-dashed bg-white  border-neutral-200 rounded-lg">
+          <Label className="mb-4" htmlFor="image">
+            Image
+          </Label>
+          <div className="w-full max-w-4xl mx-auto min-h-40 border border-dashed bg-white border-neutral-200 rounded-lg">
             <FileUpload onChange={handleFileUpload} />
           </div>
         </div>
 
         <div className="mb-4">
-          <Label className="mb-4" htmlFor="content">Content</Label>
+          <Label className="mb-4" htmlFor="content">
+            Content
+          </Label>
           <Textarea
             id="content"
             placeholder="Write your post content here"
@@ -104,7 +137,7 @@ const page = () => {
         <div className="flex justify-end">
           <Button
             type="submit"
-            className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold "
+            className="w-min mt-4 text-white rounded-full hover:scale-110 duration-500 transition font-semibold"
           >
             Create Post
           </Button>
