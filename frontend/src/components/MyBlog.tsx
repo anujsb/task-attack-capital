@@ -119,7 +119,7 @@ const MyBlog = () => {
                     {post.content.substring(0, 100)}...
                   </p>
                   <Link
-                    href={`/api/posts/${post.id}`} // Updated link to match single post route
+                    href={`/post/${post.id}`} // Updated link to match single post route
                   >
                     <Button
                       variant="outline"
