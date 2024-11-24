@@ -34,7 +34,7 @@ const MyBlog = () => {
         }
 
         const response = await fetch(
-          "https://task-attack-capital.onrender.com/api/posts/posts/user",
+          "https://task-attack-capital.onrender.com/api/posts/posts/user", // Adjusted endpoint
           {
             method: "GET",
             headers: {
@@ -71,7 +71,6 @@ const MyBlog = () => {
     fetchUserPosts();
   }, []);
 
-  // Update filtering logic to match author or email (or other condition)
   const filteredPosts = posts.filter((post) =>
     post.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -89,22 +88,21 @@ const MyBlog = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 mt-10 p-4">
       <div className="w-full">
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ ease: "easeInOut", duration: 0.75 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {" "}
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
+          {filteredPosts
+            .filter((post) => post.id) // Ensure `id` is valid
+            .map((post) => (
               <Card
                 key={post.id}
                 className="flex flex-col justify-between overflow-hidden bg-transparent shadow-none border border-secondary p-2 hover:shadow-lg duration-500 transition hover:border-accent"
               >
                 <Image
-                  src={post.imageLink || "/default-image.jpg"} // Default image if imageLink is invalid or missing
+                  src={post.imageLink || "/default-image.jpg"} // Default image fallback
                   alt={`Thumbnail for ${post.title}`}
                   width={300}
                   height={200}
@@ -120,20 +118,20 @@ const MyBlog = () => {
                   <p className="mb-4 text-sm">
                     {post.content.substring(0, 100)}...
                   </p>
-                  <Link href={`/post/${post.id}`}>
+                  <Link
+                    href={`/api/posts/${post.id}`} // Updated link to match single post route
+                  >
                     <Button
                       variant="outline"
                       className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition flex items-center justify-center"
+                      disabled={!post.id} // Disable if `id` is missing
                     >
                       Read more
                     </Button>
                   </Link>
                 </CardContent>
               </Card>
-            ))
-          ) : (
-            <div>No posts found.</div>
-          )}
+            ))}
         </motion.div>
       </div>
     </div>
