@@ -3,16 +3,15 @@ import Link from "next/link";
 import React from "react";
 import { Github } from "lucide-react";
 import { Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
 
 
 const Info = () => {
   return (
     <div className="pt-4">
-      <motion.div
-        initial={{ y: 0, opacity: 0 }}
-        animate={{ y: 20, opacity: 1 }}
-        transition={{ ease: "easeInOut", duration: 0.75 }}
+      <div
+        // initial={{ y: 0, opacity: 0 }}
+        // animate={{ y: 20, opacity: 1 }}
+        // transition={{ ease: "easeInOut", duration: 0.75 }}
       >
         <Image
           // src="/attack-white.webp"
@@ -35,7 +34,7 @@ const Info = () => {
             <Linkedin className="text-neutral-600" />
           </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
