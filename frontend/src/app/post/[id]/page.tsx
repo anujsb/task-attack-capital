@@ -97,6 +97,9 @@
 
 
 // File: frontend/src/app/post/[id]/page.tsx
+
+
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -114,6 +117,7 @@ interface Post {
 }
 
 const PostPage = ({ params }: { params: { id: string } }) => {
+  const router = useRouter();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -129,8 +133,6 @@ const PostPage = ({ params }: { params: { id: string } }) => {
           throw new Error(`Failed to fetch post: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Fetched Post:", data);
-
         setPost(data);
       } catch (err: any) {
         setError(err.message || "Error fetching post.");
@@ -174,7 +176,7 @@ const PostPage = ({ params }: { params: { id: string } }) => {
       <Button
         variant="outline"
         className="mt-4 bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none"
-        onClick={() => router.push("/")} // Navigate back to blog listing
+        onClick={() => router.push("/")}
       >
         Back to Blog
       </Button>
