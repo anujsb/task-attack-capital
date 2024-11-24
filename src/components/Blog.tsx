@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +9,7 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 interface Post {
   id: number;
@@ -85,37 +88,44 @@ const Blog = () => {
       <div className="w-full lg:w-3/4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map((post) => (
-            <Card
-              key={post.id}
-              className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm "
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeInOut", duration: 0.75 }}
             >
-              <Image
-                src={post.image}
-                alt={`Thumbnail for ${post.title}`}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover rounded-md "
-              />
-              <CardHeader>
-                <CardTitle className="text-lg">{post.title}</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  By {post.author}
-                </p>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4 text-sm">
-                  {post.content.substring(0, 100)}...
-                </p>
-                <Link href={`/post/${post.id}`}>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none"
-                  >
-                    Read more
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+              <Card
+                key={post.id}
+                className="flex flex-col justify-between overflow-hidden bg-transparent shadow-none border border-secondary p-2 hover:shadow-lg duration-500 transition hover:border-accent"
+              >
+                <Image
+                  src={post.image}
+                  alt={`Thumbnail for ${post.title}`}
+                  width={300}
+                  height={200}
+                  className="w-full h-48 object-cover rounded-md "
+                />
+                <CardHeader>
+                  <CardTitle className="text-lg">{post.title}</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    By {post.author}
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-sm">
+                    {post.content.substring(0, 100)}...
+                  </p>
+                  <Link href={`/post/${post.id}`}>
+                    <Button
+                      variant="outline"
+                      className="w-full bg-[#ffffff] hover:bg-[#1a2ffb] hover:text-white rounded-full shadow-md hover:shadow-lg font-semibold border-none hover:scale-110 duration-500 transition  flex  items-center justify-center"
+                    >
+                      Read more
+                      <ChevronRight />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

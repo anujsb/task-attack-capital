@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <nav className="sticky top-0 border-b backdrop-blur-lg shadow-sm  p-4 z-30">
+    <nav className="sticky top-0 border-b backdrop-blur-lg shadow-sm  p-2 z-30 rounded-b-2xl">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
           BlogPlatform
