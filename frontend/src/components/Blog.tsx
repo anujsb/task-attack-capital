@@ -105,7 +105,7 @@ const Blog = () => {
             filteredPosts.map((post) => (
               <Card
                 key={post._id}
-                className="overflow-hidden bg-transparent shadow-none border border-accent p-2 hover:shadow-sm"
+                className="flex flex-col justify-between overflow-hidden bg-transparent shadow-none border border-secondary p-2 hover:shadow-lg duration-500 transition hover:border-accent"
               >
                 <Image
                   src={post.imageLink || "/default-image.jpg"}
