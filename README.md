@@ -41,7 +41,6 @@
 ### Clone the Repository
 ```
 git clone https://github.com/your-username/personal-blog-platform.git
-cd personal-blog-platform
 ```
 Backend Setup
 
@@ -57,9 +56,22 @@ npm install
 ```
 	3.	Create a .env file and configure the following environment variables:
 ```
-PORT=5000
-MONGO_URI=your_mongo_database_uri
-JWT_SECRET=your_secret_key
+
+
+MONGODB_URL=mongodb+srv://anujsbhuyar:anujsbhuyar@cluster0.ax80w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+JWT_SECRET=anujsbhuyaranujsbhuyar
+
+PORT=3000
+
+CLOUDINARY_CLOUD_NAME=dn0ws0os3
+
+CLOUDINARY_API_KEY=456731868578511
+
+CLOUDINARY_API_SECRET=sO4Nm8lwpQiQfbmKOOkWzHDrQjY
+
+
+
 ```
 
 	4.	Start the backend server:
